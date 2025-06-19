@@ -24,6 +24,12 @@ function App() {
   setTrackPlaylistArr([...trackPlaylistArr, songResults]);
  }
  
+ //Remove Track from Playlist
+ const removeTrack = (index) =>{
+  const items = trackPlaylistArr;
+  const updatedTracklist = items.filter((item, i) => i !== index);
+  setTrackPlaylistArr(updatedTracklist);
+ }
 
   return (
     <>
@@ -39,8 +45,9 @@ function App() {
         <SearchResults songResults={songResults} handleSongAdd={handleSongAdd}/>
       </div>
       <div>
-        <Playlist trackPlaylistArr={trackPlaylistArr}/>
+        <Playlist trackPlaylistArr={trackPlaylistArr} removeTrack={removeTrack}/>
       </div>
+      
     </>
   );
 }
