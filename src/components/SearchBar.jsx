@@ -6,6 +6,7 @@ const SearchBar = ({ songSearch, setSongSearch, handleSubmit }) => {
       <form onSubmit={handleSubmit}>
         <div>
           <input
+            id="songsearch"
             type="text"
             placeholder="Search for any song!"
             value={songSearch}
