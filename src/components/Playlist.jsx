@@ -23,8 +23,10 @@ const Playlist = ({ trackPlaylistArr, removeTrack }) => {
         <ul>
           {trackPlaylistArr.map((track, index) => (
             <div>
-              <li key={index}>{track}</li>
-              <button onClick={() => removeTrack(index)}>x</button>
+              <li key={index}>
+                {track}
+                <button onClick={() => removeTrack(index)}>x</button>
+              </li>
             </div>
           ))}
         </ul>
