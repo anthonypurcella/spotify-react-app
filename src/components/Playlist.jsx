@@ -1,4 +1,5 @@
 import React from "react";
+import Track from "./Track";
 
 const playlistNameStyle = {
   border: "none",
@@ -11,27 +12,33 @@ const Playlist = ({ trackPlaylistArr, removeTrack }) => {
 
   return (
     <>
-      <div>
-        <input
-          style={playlistNameStyle}
-          id="playlistname"
-          type="text"
-          placeholder="Playlist Name"
-        />
-      </div>
-      <div>
-        <ul>
-          {trackPlaylistArr.map((track, index) => (
-            <div>
-              <li key={index}>
-                {track}
-                <button onClick={() => removeTrack(index)}>x</button>
+      <div className="playlistDiv">
+        <div className="playlistInput">
+          <input
+            style={playlistNameStyle}
+            id="playlistname"
+            type="text"
+            placeholder="Playlist Name"
+          />
+        </div>
+        <div>
+          <ul>
+            {trackPlaylistArr.map((item) => (
+              <li key={item.uri}>
+                <Track
+                  song={item.name}
+                  artist={item.artists[0].name}
+                  uri={item.uri}
+                  image={item.album.images[0].url}
+                  onAction={() => removeTrack(item.uri)}
+                  buttonLabel="x"
+                />
               </li>
-            </div>
-          ))}
-        </ul>
+            ))}
+          </ul>
+        </div>
+        <button className="spotifySaveButton">SAVE TO SPOTIFY</button>
       </div>
-      <button>SAVE TO SPOTIFY</button>
     </>
   );
 };

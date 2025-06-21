@@ -28,30 +28,9 @@ function App() {
     );
     const data = await response.json();
 
-    setSongResults([
-      data.tracks.items[0].name,
-      data.tracks.items[1].name,
-      data.tracks.items[2].name,
-      data.tracks.items[3].name,
-      data.tracks.items[4].name,
-      data.tracks.items[5].name,
-      data.tracks.items[6].name,
-      data.tracks.items[7].name,
-      data.tracks.items[8].name,
-      data.tracks.items[9].name,
-      data.tracks.items[10].name,
-      data.tracks.items[11].name,
-      data.tracks.items[12].name,
-      data.tracks.items[13].name,
-      data.tracks.items[14].name,
-      data.tracks.items[15].name,
-      data.tracks.items[16].name,
-      data.tracks.items[17].name,
-      data.tracks.items[18].name,
-      data.tracks.items[19].name,
-    ]);
-
-    console.log(data.tracks.items);
+    setSongResults(data);
+      
+    console.log(data);
   }
 
   //Track Playlist State
@@ -62,10 +41,8 @@ function App() {
   }
 
   //Remove Track from Playlist
-  const removeTrack = (index) => {
-    const items = trackPlaylistArr;
-    const updatedTracklist = items.filter((item, i) => i !== index);
-    setTrackPlaylistArr(updatedTracklist);
+  const removeTrack = (uri) => {
+    setTrackPlaylistArr((prev) => prev.filter((track) => track.uri !== uri));
   };
 
   //State API Token
@@ -87,8 +64,10 @@ function App() {
 
   return (
     <>
-      <header>JAMMING</header>
-      <div ></div>
+      <header>
+        <h1>Jammming</h1>
+      </header>
+      <div></div>
       <div>
         <SearchBar
           songSearch={songSearch}
@@ -96,7 +75,7 @@ function App() {
           handleSubmit={handleSubmit}
         />
       </div>
-      <div style={{ display: "flex" }}>
+      <div className="mainDiv">
         <div>
           <SearchResults
             songResults={songResults}
@@ -110,6 +89,7 @@ function App() {
           />
         </div>
       </div>
+      <footer></footer>
     </>
   );
 }

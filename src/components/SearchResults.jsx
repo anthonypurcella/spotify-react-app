@@ -6,19 +6,27 @@ const SearchResults = ({ songResults, handleSongAdd}) => {
 
   if (songResults.length < 1) {
     return (
-      <div>
+      <div className="resultsDiv">
         <h1>Results</h1>
       </div>
     );
   } else {
     return (
       <>
-        <div>
+        <div className="resultsDiv">
           <h1>Results</h1>
           <div>
             <ul>
-              {songResults.map((song) => (
-                <Track key={song.id} song={song} onAdd={() => handleSongAdd(song)}/>
+              {songResults.tracks.items.map((item) => (
+                <li key={item.uri}>
+                  <Track
+                    song={item.name}
+                    artist={item.artists[0].name}
+                    uri={item.uri}
+                    image={item.album.images[0].url}
+                    onAction={() => handleSongAdd(item)}
+                  />
+                </li>
               ))}
             </ul>
           </div>
@@ -29,3 +37,6 @@ const SearchResults = ({ songResults, handleSongAdd}) => {
 };
 
 export default SearchResults;
+
+
+

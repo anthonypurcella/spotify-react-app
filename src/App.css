@@ -1,12 +1,185 @@
 * {
   text-align: center;
   margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+:root {
+  background-color: brown;
 }
 
-div {
-  align-items: center;
+header {
+  font-size: 2rem;
+  background-color: rgba(27, 27, 27, .95);
+  box-shadow: 0 0 5px 1px rgba(27, 27, 27, .95);
+  margin-bottom: 2rem;
+  padding: 2rem;
 }
+
+h1, header {
+  color: whitesmoke;
+}
+
+
 
 li {
   list-style: none;
+}
+
+img {
+  width: 50px;
+}
+
+
+.mainDiv {
+  display: flex;
+  width: 1500px;
+}
+
+/* Search Bar Styling */
+
+.searchBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.searchBar input {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.5em 2em;
+  font-size: 2em;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.searchBar button {
+  margin: 10px 2rem 2rem 2rem;
+  background-color: rgba(27, 27, 27, .95);
+  color: whitesmoke;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.8em 2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* Song Results Styling */
+.resultsDiv {
+  background-color: rgba(27, 27, 27, .95);
+  box-shadow: 0 0 5px 1px;
+  border-radius: 10px;
+  width: 35rem;
+  min-height: 60rem;
+  max-height: 80rem;
+  overflow-y: auto;
+  white-space: nowrap;
+  animation: scroll 2s linear infinite;
+  padding: 1rem;
+}
+
+.resultsDiv h1 {
+  margin-top: 20px;
+  margin-bottom: 1rem;
+  margin-left: 40px;
+  text-align: left;
+  padding-bottom: 20px;
+  border-bottom: solid grey 1px;
+  margin-right: 30px;
+}
+
+/* Playlist Styling */
+.playlistDiv {
+  background-color: rgba(27, 27, 27, .95);
+  box-shadow: 0 0 5px 1px;
+  border-radius: 10px;
+  width: 35rem;
+  min-height: 60rem;
+  max-height: 80rem;
+  overflow-y: auto;
+  white-space: nowrap;
+  animation: scroll 2s linear infinite;
+  padding: 1rem;
+  justify-items: center;
+}
+
+.playlistInput {
+  width: 475px;
+  height: 50px;
+  border-bottom: solid grey 1px;
+  padding: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.playlistInput input {
+  color: whitesmoke;
+}
+
+.spotifySaveButton {
+  margin-top: 25px;
+  color: whitesmoke;
+}
+
+/* Track Component Styling */
+
+.trackTitleStyle {
+  font-size: 1.25rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  animation: scroll 2s linear infinite;
+  max-width: 320px;
+}
+
+.divTrackStyle {
+  display: flex;
+  flex-direction: row;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: solid grey 1px;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.divTrackTextStyle {
+  text-align: left;
+  color: whitesmoke;
+}
+
+.artistStyle {
+  color: grey;
+}
+
+.buttonStyle {
+  margin-right: 10px;
+}
+
+button {
+  background-color: brown;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.25s;
+}
+button:hover {
+  border-color: whitesmoke;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.trackDivStyle {
+  margin-left: 0;
+  margin-right: 25px;
+}
+
+
+footer {
+  margin-top: 10rem;
 }
