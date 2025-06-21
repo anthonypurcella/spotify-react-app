@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState} from "react";
 
 const SearchBar = ({ songSearch, setSongSearch, handleSubmit }) => {
+
   return (
     <>
       <div className="searchBar">
@@ -14,7 +15,7 @@ const SearchBar = ({ songSearch, setSongSearch, handleSubmit }) => {
               onChange={(e) => setSongSearch(e.target.value)}
             />
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit" disabled={!songSearch}>Submit</button>
         </form>
       </div>
     </>
