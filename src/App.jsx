@@ -65,7 +65,7 @@ function App() {
   return (
     <>
       <header>
-        <h1>Jammming</h1>
+        <h1>Ja<em>mmm</em>ing</h1>
       </header>
       <div></div>
       <div>
