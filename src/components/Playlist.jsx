@@ -23,14 +23,14 @@ const Playlist = ({ trackPlaylistArr, removeTrack }) => {
         </div>
         <div>
           <ul>
-            {trackPlaylistArr.map((item) => (
-              <li key={item.uri}>
+            {trackPlaylistArr.map((item, index) => (
+              <li key={item.uri + index}>
                 <Track
                   song={item.name}
                   artist={item.artists[0].name}
                   uri={item.uri}
                   image={item.album.images[0].url}
-                  onAction={() => removeTrack(item.uri)}
+                  onAction={() => removeTrack((item.uri + index))}
                   buttonLabel="x"
                 />
               </li>

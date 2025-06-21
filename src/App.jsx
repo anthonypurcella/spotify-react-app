@@ -41,8 +41,8 @@ function App() {
   }
 
   //Remove Track from Playlist
-  const removeTrack = (uri) => {
-    setTrackPlaylistArr((prev) => prev.filter((track) => track.uri !== uri));
+  const removeTrack = (keyToRemove) => {
+    setTrackPlaylistArr((prev) => prev.filter((track, index) => (track.uri + index) !== keyToRemove));
   };
 
   //State API Token
