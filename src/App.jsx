@@ -3,6 +3,7 @@ import "./App.css";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import Playlist from "./components/Playlist";
+import User from "./components/User";
 
 //Base URL of API
 const SPOTIFY_API_BASE_URL = "https://api.spotify.com/v1/search";
@@ -11,6 +12,97 @@ const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 const SPOTIFY_CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
 
 function App() {
+  const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID; // Replace with your client ID
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("code");
+
+  async function spotifyLogin() {
+    if (!code) {
+      redirectToAuthCodeFlow(clientId);
+    } else {
+      const accessToken = await getAccessToken(clientId, code);
+      const profile = await fetchProfile(accessToken);
+
+      populateUI(profile);
+      console.log(profile);
+    }
+
+    async function redirectToAuthCodeFlow(clientId) {
+      const verifier = generateCodeVerifier(128);
+      const challenge = await generateCodeChallenge(verifier);
+
+      localStorage.setItem("verifier", verifier);
+
+      const params = new URLSearchParams();
+      params.append("client_id", clientId);
+      params.append("response_type", "code");
+      params.append("redirect_uri", "https://10.0.0.16:5173/callback");
+      params.append("scope", "user-read-private user-read-email");
+      params.append("code_challenge_method", "S256");
+      params.append("code_challenge", challenge);
+
+      document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
+    }
+
+    function generateCodeVerifier(length) {
+      let text = "";
+      let possible =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for (let i = 0; i < length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      }
+      return text;
+    }
+
+    async function generateCodeChallenge(codeVerifier) {
+      const data = new TextEncoder().encode(codeVerifier);
+      const digest = await window.crypto.subtle.digest("SHA-256", data);
+      return btoa(String.fromCharCode.apply(null, [...new Uint8Array(digest)]))
+        .replace(/\+/g, "-")
+        .replace(/\//g, "_")
+        .replace(/=+$/, "");
+    }
+
+    async function getAccessToken(clientId, code) {
+      const verifier = localStorage.getItem("verifier");
+
+      const params = new URLSearchParams();
+      params.append("client_id", clientId);
+      params.append("grant_type", "authorization_code");
+      params.append("code", code);
+      params.append("redirect_uri", "https://10.0.0.16:5173/callback");
+      params.append("code_verifier", verifier);
+
+      const result = await fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params,
+      });
+
+      const { access_token } = await result.json();
+      return access_token;
+    }
+
+    async function fetchProfile(token) {
+      const result = await fetch("https://api.spotify.com/v1/me", {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      return await result.json();
+    }
+    async function populateUI(profile) {
+      setUserName(profile.display_name);
+      setUserEmail(profile.email);
+      setuserImageURL(profile.images[0].url);
+    }
+  }
+
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userImageURL, setuserImageURL] = useState("");
+
   // Take user input in SearchBar and adds to SearchResults
   //Song search State
   const [songSearch, setSongSearch] = useState("");
@@ -29,7 +121,7 @@ function App() {
     const data = await response.json();
 
     setSongResults(data);
-      
+
     console.log(data);
   }
 
@@ -42,11 +134,29 @@ function App() {
 
   //Remove Track from Playlist
   const removeTrack = (keyToRemove) => {
-    setTrackPlaylistArr((prev) => prev.filter((track, index) => (track.uri + index) !== keyToRemove));
+    setTrackPlaylistArr((prev) =>
+      prev.filter((track, index) => track.uri + index !== keyToRemove)
+    );
   };
 
+  // Save Playlist to Spotify
+  async function savePlaylistToSpotify(e) {
+    e.preventDefault();
+    alert("Button Works");
+
+    //Send USER ID API Request
+    const response = await fetch(``);
+
+    const data = await response.json();
+
+    console.log(data);
+  }
   //State API Token
   const [accessToken, setAccessToken] = useState("");
+
+  useEffect(() => {
+    spotifyLogin();
+  }, []);
 
   //Get API Token
   useEffect(() => {
@@ -65,9 +175,11 @@ function App() {
   return (
     <>
       <header>
-        <h1>Ja<em>mmm</em>ing</h1>
+        <h1>
+          Ja<em>mmm</em>ing
+        </h1>
       </header>
-      <div></div>
+        <User userName={userName} userImageURL={userImageURL} />
       <div>
         <SearchBar
           songSearch={songSearch}
@@ -86,6 +198,7 @@ function App() {
           <Playlist
             trackPlaylistArr={trackPlaylistArr}
             removeTrack={removeTrack}
+            savePlaylistToSpotify={savePlaylistToSpotify}
           />
         </div>
       </div>

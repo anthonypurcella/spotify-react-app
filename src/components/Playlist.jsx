@@ -2,7 +2,7 @@ import React from "react";
 import Track from "./Track";
 
 
-const Playlist = ({ trackPlaylistArr, removeTrack }) => {
+const Playlist = ({ trackPlaylistArr, removeTrack, savePlaylistToSpotify }) => {
 
   return (
     <>
@@ -32,7 +32,7 @@ const Playlist = ({ trackPlaylistArr, removeTrack }) => {
             ))}
           </ul>
         </div>
-        <button className="spotifySaveButton">Save To Spotify</button>
+        <button className="spotifySaveButton" onClick={savePlaylistToSpotify}>Save To Spotify</button>
       </div>
     </>
   );
