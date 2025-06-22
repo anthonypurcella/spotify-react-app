@@ -22,6 +22,7 @@ const SearchResults = ({ songResults, handleSongAdd}) => {
                   <Track
                     song={item.name}
                     artist={item.artists[0].name}
+                    album={item.album.name}
                     uri={item.uri}
                     image={item.album.images[0].url}
                     onAction={() => handleSongAdd(item)}
