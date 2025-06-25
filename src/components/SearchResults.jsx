@@ -14,8 +14,8 @@ const SearchResults = ({ songResults, handleSongAdd}) => {
     return (
       <>
         <div className="resultsDiv">
-          <h1>Results</h1>
-          <div>
+          <div className="resultsH1Container"><h1>Results</h1></div>
+          <div className="tracksContainer">
             <ul>
               {songResults.tracks.items.map((item) => (
                 <li key={item.uri}>

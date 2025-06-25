@@ -144,15 +144,20 @@ function App() {
   //Submits what is in SearchBar to SearchResults
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("Search for " + songSearch);
+    if (!login) {
+      alert('Please sign in to your Spotify Acoount');
+    } else {
+      console.log("Search for " + songSearch);
 
-    // Search API request
-    const response = await fetch(
-      `${SPOTIFY_API_BASE_URL}?q=${songSearch}&type=track&limit=20&access_token=${accessToken}`
-    );
-    const data = await response.json();
-    setSongResults(data);
-    console.log(data);
+      // Search API request
+      const response = await fetch(
+        `${SPOTIFY_API_BASE_URL}?q=${songSearch}&type=track&limit=20&access_token=${accessToken}`
+      );
+      const data = await response.json();
+      setSongResults(data);
+      console.log(data);
+    }
+    
   }
 
   //Playlist Name State
@@ -232,6 +237,8 @@ function App() {
         if (response.ok) {
           setTrackPlaylistArr([]);
           alert(`'${playlistName}' has been added to your Spotify Account!`);
+        } if (!response.ok) {
+          alert('Something went wrong - please try again!');
         }
       }
     }
@@ -261,8 +268,8 @@ function App() {
         signOut={signOut}
         login={login}
       />
-      <div>
-        <div>
+      <div className="bodyContainer">
+        <div className="searchContainer">
           <SearchBar
             songSearch={songSearch}
             setSongSearch={setSongSearch}
@@ -270,7 +277,6 @@ function App() {
           />
         </div>
         <div className="mainDivContainer">
-          <div className="mainDiv">
             <SearchResults
               songResults={songResults}
               handleSongAdd={handleSongAdd}
@@ -283,8 +289,6 @@ function App() {
             />
           </div>
         </div>
-      </div>
-      <footer></footer>
     </>
   );
 }
