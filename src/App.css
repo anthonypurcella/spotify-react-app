@@ -15,14 +15,19 @@ header {
   box-shadow: 0 0 5px 1px rgba(27, 27, 27, .95);
   padding: 2rem;
   align-items: center;
+  border: 1px solid blue;
 }
 
 header h1 {
   color: whitesmoke;
+  border: 1px solid blue;
+  width: 30rem;
 }
 
 
-
+div {
+  border: green 4px solid;
+}
 
 li {
   list-style: none;
@@ -32,12 +37,6 @@ img {
   width: 50px;
 }
 
-
-.mainDiv {
-  display: flex;
-  width: 1500px;
-  
-}
 
 /* User Icon Styling */
 
@@ -49,8 +48,39 @@ img {
   margin: 0 0;
   margin-right: 50px;
   transform: translateY(-100px);
-  
 }
+
+.spotifyUser button {
+  height: 30px;
+  transform: translateY(-10px);
+  color:  rgba(104, 104, 104, 0.9);
+
+}
+
+.spotifyUser button:hover {
+  border-color: transparent;
+}
+
+.signInUser {
+  display: flex;
+  flex-direction: column;
+  justify-self: end;
+  font-size: 15px;
+  margin: 0 0;
+  margin-right: 50px;
+  transform: translateY(-100px);
+  width: 100px;
+  height: 97px;
+
+}
+.signInUser button {
+  color: rgba(30, 215, 96, 100);
+  margin-top: 20px;
+}
+.signInUser:hover {
+  cursor: pointer;
+}
+
 .profileImage {
   width: 60px;
   height: 60px;
@@ -65,6 +95,8 @@ img {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 500px;
+  border: solid blue 2px;
 }
 .searchBar input {
   border-radius: 8px;
@@ -93,21 +125,35 @@ img {
   margin-bottom: 4rem;
 }
 
+.mainDivContainer {
+  width: 1500px;
+}
+
+.mainDiv {
+  border: solid blue 2px;
+  background-color: yellow;
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+
 /* Song Results Styling */
 .resultsDiv {
+  border: solid pink 2px;
   background-color: rgba(27, 27, 27, .6);
   box-shadow: 0 0 5px 1px;
   border-radius: 10px;
   width: 35rem;
-  min-height: 60rem;
   max-height: 78.25rem;
   overflow-y: auto;
-  white-space: nowrap;
   animation: scroll 2s linear infinite;
   padding: 1rem;
+  min-height: 60rem;
 }
 
 .resultsDiv h1 {
+  border: solid blue 2px;
   margin-top: 20px;
   margin-bottom: 1rem;
   margin-left: 40px;
@@ -120,6 +166,7 @@ img {
 
 /* Playlist Styling */
 .playlistDiv {
+  border: solid pink 2px;
   background-color: rgba(27, 27, 27, .6);
   box-shadow: 0 0 5px 1px;
   border-radius: 10px;
@@ -131,6 +178,7 @@ img {
   animation: scroll 2s linear infinite;
   justify-items: center;
   padding: 1rem;
+  
 }
 
 .inputDiv {
@@ -224,3 +272,51 @@ button:focus-visible {
 footer {
   margin-top: 10rem;
 }
+
+
+
+@media only screen and (max-width: 1515px) {
+  .mainDivContainer {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1275px) {
+  .mainDiv {
+    display: inline;
+  }
+  .resultsDiv {
+    margin-bottom: 2rem;
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  header h1 {
+    font-size: 3rem;
+    width: 280px;
+  }
+  .spotifyUser {
+    scale: calc(.70);
+    transform: translateY(-150px);
+    margin-right: 10px;
+  }
+  .searchBar {
+    scale: calc(.75);
+  }
+  .resultsDiv, .playlistDiv {
+    scale: calc(.6);
+    transform: translateY(-360px);
+  }
+
+  .playlistDiv {
+    transform: translateY(-1050px);
+  }
+  .mainDivContainer {
+    height: 1250px;
+  }
+}
+
+
+
+
+

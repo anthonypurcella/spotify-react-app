@@ -2,7 +2,7 @@ import React from "react";
 import Track from "./Track";
 
 
-const Playlist = ({ trackPlaylistArr, removeTrack, savePlaylistToSpotify }) => {
+const Playlist = ({ setPlaylistName ,trackPlaylistArr, removeTrack, savePlaylistToSpotify }) => {
 
   return (
     <>
@@ -13,6 +13,9 @@ const Playlist = ({ trackPlaylistArr, removeTrack, savePlaylistToSpotify }) => {
             id="playlistname"
             type="text"
             placeholder="Playlist Name"
+            onChange={(e) => {
+              setPlaylistName(e.target.value)
+            }}
           />
         </div>
         <div>
