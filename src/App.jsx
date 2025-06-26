@@ -7,11 +7,10 @@ import User from "./components/User";
 
 //Base URL of API
 const SPOTIFY_API_BASE_URL = "https://api.spotify.com/v1/search";
-const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-const SPOTIFY_CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
 
 function App() {
-  const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID; // Replace with your client ID
+  const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+  const redirectURI = import.meta.env.VITE_REDIRECT_URI;
 
   //State API Token
   const [accessToken, setAccessToken] = useState("");
@@ -68,7 +67,7 @@ function App() {
       const params = new URLSearchParams();
       params.append("client_id", clientId);
       params.append("response_type", "code");
-      params.append("redirect_uri", "https://10.0.0.16:5173/callback");
+      params.append("redirect_uri", redirectURI);
       params.append(
         "scope",
         "user-read-private user-read-email playlist-modify-public playlist-modify-private"
@@ -106,7 +105,7 @@ function App() {
       params.append("client_id", clientId);
       params.append("grant_type", "authorization_code");
       params.append("code", code);
-      params.append("redirect_uri", "https://10.0.0.16:5173/callback");
+      params.append("redirect_uri", redirectURI);
       params.append("code_verifier", verifier);
 
       const result = await fetch("https://accounts.spotify.com/api/token", {

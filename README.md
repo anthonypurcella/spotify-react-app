@@ -1,12 +1,55 @@
-# React + Vite
+# Jammming - Spotify API Playlist Creation (Codecademy Project)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Jammming is a simple Spotify API Web App, built using React/Vite, to have a user create a playlist and add it to their own Spotify account.
+User will login to their Spotify and then be able to search through Spotfiy's Track API and add songs to a playlist that can be added to their account.
 
-Currently, two official plugins are available:
+*For this project to work, you will need to create an app with Spotify for Developers*
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+1. Clone the repository: 
+```bash
+   git clone git@github.com:anthonypurcella/spotify-react-app.git
+```
+2. Install dependencies:
+```bash
+npm install
+```
+3. Create App through Spotify for Developers
+Once app is built there are three (3) things you will need
+    - Client ID
+    - Client Secret
+    - Redirect URIs (Since this is a locally ran project, add the URL provided after running the *hosted network project run (provided below) with /callback*)
 
-## Expanding the ESLint configuration
+4. Create .env.local File
+   - Add '.env.local' file to your the main project folder
+   - Inside of '.env.local' add
+     - VITE_SPOTIFY_CLIENT_ID = *your_spotify_client_id*
+     - VITE_SPOTIFY_CLIENT_SECRET = *your_spotify_client_secret*
+     - VITE_REDIRECT_URI = *your_redirect_uri*    
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Usage
+To run the project, use the following command:
+```bash
+npm run dev
+```
+To run on a hosted network:
+```bash
+npm run dev -- --host
+```
+In you browser, go to to the provided URL Address to view the project.
+
+## Features
+- Spotify Login/Sign Out (Uses Spotify's Code Verification API to Login to User's Account and genereate an ACCESS TOKEN - *Access Token will be used for all Spotify API Functionality*)
+- Song Search Using Spotify Track API
+- Display Results (20) With Ability To Add to Playlist
+- Playlist Naming, Song Removal & Save to Spotify
+
+## License
+This project is licensed under the [MIT License](LICENSE).
+
+### Documentation
+Spotify for Developers (Getting Started - *Create an app*) - https://developer.spotify.com/documentation/web-api/tutorials/getting-started
+User Profile API - https://developer.spotify.com/documentation/web-api/reference/get-current-users-profile
+Search API - https://developer.spotify.com/documentation/web-api/reference/search
+Track API - https://developer.spotify.com/documentation/web-api/reference/get-track
+Add Playlist API - https://developer.spotify.com/documentation/web-api/reference/create-playlist
