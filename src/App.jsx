@@ -254,6 +254,13 @@ function App() {
     }
   }, []);
 
+  //Sign Out if Access Token not avaiable
+  useEffect(() => {
+    if (accessToken === "" && login === true) {
+      signOut();
+    }
+  }, []);
+
   return (
     <>
       <header>
