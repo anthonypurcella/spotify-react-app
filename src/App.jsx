@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import "./App.css";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
@@ -49,8 +49,7 @@ function App() {
       const profile = await fetchProfile(storedToken);
       populateUI(profile);
       setLogin(true);
-      setSpotifyAccountType(profile.type);
-      console.log(spotifyAccountType);
+      setSpotifyAccountType(profile.product);
       return;
     }
 
@@ -61,6 +60,7 @@ function App() {
       const profile = await fetchProfile(accessToken);
       setLogin(true);
       populateUI(profile);
+      setSpotifyAccountType(profile.product);
       console.log(profile);
     }
 
@@ -173,12 +173,27 @@ function App() {
     }
   }
 
-  //Playback Embed
-  const [currentURI, setCurrentURI] = useState(
-    "spotify:track:29JLgNBcOky7QB68OrvYxO"
-  );
-  async function playSong(songURI) {
+  //Current Song State
+  const [isActive, setIsActive] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [currentURI, setCurrentURI] = useState('');
+  const [currentSong, setCurrentSong] = useState('');
+  const [currentArtist, setCurrentArtist] = useState("");
+  const [currentAlbum, setCurrentAlbum] = useState("");
+  const [currentAlbumCover, setCurrentAlbumCover] = useState('');
+  
+  async function playToggle(songURI, song, artist, album, image) {
+    if (songURI === currentURI) {
+      setIsPaused(prev => !prev);
+      return;
+    }
+
+    setIsActive(true);
     setCurrentURI(songURI);
+    setCurrentSong(song);
+    setCurrentArtist(artist);
+    setCurrentAlbum(album);
+    setCurrentAlbumCover(image);
   }
 
   //Playlist Name State
@@ -309,6 +324,10 @@ function App() {
           <SpotifyWebPlayer
             accessToken={accessToken}
             currentURI={currentURI}
+            currentSong={currentSong}
+            currentArtist={currentArtist}
+            currentAlbum={currentAlbum}
+            currentAlbumCover={currentAlbumCover}
             spotifyAccountType={spotifyAccountType}
           />
         </div>
@@ -332,7 +351,10 @@ function App() {
             )}
             <SearchResults
               songResults={songResults}
-              playSong={playSong}
+              isActive={isActive}
+              isPaused={isPaused}
+              currentURI={currentURI}
+              playToggle={playToggle}
               handleSongAdd={handleSongAdd}
               spotifyAccountType={spotifyAccountType}
             />

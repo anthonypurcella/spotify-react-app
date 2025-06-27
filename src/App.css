@@ -28,8 +28,30 @@ li {
   list-style: none;
 }
 
-img {
+.smallImage {
   width: 50px;
+}
+
+@property --angle{
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.biggerImage {
+  width: 100px;
+  border:  1px solid transparent;
+  background-image: repeating-conic-gradient(from var(--angle), rgba(30, 215, 96, 100), rgb(111, 144, 118), rgba(30, 215, 96, 100));
+  animation: 2s spin linear infinite;
+}
+
+@keyframes spin{
+  from{
+    --angle: 0deg;
+  }
+  to{
+    --angle: 360deg;
+  }
 }
 
 
@@ -92,9 +114,36 @@ img {
 }
 
 .embedPlayer {
-  width: 54.5%;
-  max-width: 54.5%;
+  width: 800px;
 }
+.webplayer {
+  background-color: rgba(27, 27, 27, .6);
+  box-shadow: 0 0 5px 1px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+  align-items: center;
+  transform: translateY(-100px);
+}
+.webSongStyle {
+  text-align: left;
+  color: whitesmoke;
+  font-size: 1.5rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  animation: scroll 2s linear infinite;
+  margin-bottom: 5px;
+}
+.webArtistStyle {
+  color: grey;
+  font-size: 1.25rem;
+  text-align: left;
+  overflow-x: auto;
+  white-space: nowrap;
+  animation: scroll 2s linear infinite;
+}
+
 /* Search Bar Styling */
 .searchContainer {
   transform: translateY(-100px);
@@ -303,6 +352,9 @@ button:focus-visible {
 
 
 @media only screen and (max-width: 1275px) {
+  .embedPlayer {
+    width: 650px;
+  }
   .mainDivContainer {
     flex-direction: column;
   }

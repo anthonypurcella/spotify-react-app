@@ -2,7 +2,7 @@ import React from "react";
 import Track from "./Track";
 
 
-const SearchResults = ({ songResults, handleSongAdd, playSong}) => {
+const SearchResults = ({ songResults, isActive, isPaused, currentURI, handleSongAdd, playToggle, spotifyAccountType}) => {
 
   
 
@@ -23,11 +23,14 @@ const SearchResults = ({ songResults, handleSongAdd, playSong}) => {
                 <li key={item.uri}>
                   <Track
                     song={item.name}
+                    isActive={item.uri === currentURI}
+                    isPaused={isPaused}
                     artist={item.artists[0].name}
                     album={item.album.name}
                     uri={item.uri}
                     image={item.album.images[0].url}
-                    playSong={() => playSong(item.uri)}
+                    spotifyAccountType={spotifyAccountType}
+                    playToggle={() => playToggle(item.uri, item.name, item.artists[0].name, item.album.name, item.album.images[0].url)}
                     onAction={() => handleSongAdd(item)}
                   />
                 </li>

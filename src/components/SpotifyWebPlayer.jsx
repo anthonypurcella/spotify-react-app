@@ -1,16 +1,24 @@
 // components/SpotifyWebPlayer.jsx
 import { useEffect, useRef, useState } from "react";
 
-const SpotifyWebPlayer = ({ accessToken, currentURI, spotifyAccountType }) => {
+
+const SpotifyWebPlayer = ({
+  accessToken,
+  currentURI,
+  currentSong,
+  currentArtist,
+  currentAlbum,
+  currentAlbumCover,
+  spotifyAccountType,
+  buttonLabel = "+",
+}) => {
   const playerRef = useRef(null);
   const [deviceId, setDeviceId] = useState(null);
   const [playerReady, setPlayerReady] = useState(false);
 
-  if (spotifyAccountType === "free") {
-    return;
-  } if (spotifyAccountType === "premium") {
-    // Load SDK
-    useEffect(() => {
+  // Load SDK
+  useEffect(() => {
+    if (spotifyAccountType === "premium") {
       const scriptTagId = "spotify-sdk";
 
       if (!document.getElementById(scriptTagId)) {
@@ -54,8 +62,11 @@ const SpotifyWebPlayer = ({ accessToken, currentURI, spotifyAccountType }) => {
 
         player.connect();
       };
-    }, [accessToken]);
+    }
+  }, [accessToken]);
 
+  const play = null;
+  if (play) {
     // Trigger playback when URI changes
     useEffect(() => {
       if (playerReady && deviceId && currentURI) {
@@ -80,14 +91,21 @@ const SpotifyWebPlayer = ({ accessToken, currentURI, spotifyAccountType }) => {
         }
       }
     }, [playerReady, deviceId, currentURI, accessToken]);
-
+  }
+  if (spotifyAccountType === "premium" && currentURI) {
     return (
       <div>
-        {playerReady ? (
-          <div>✅ Web Player is ready.</div>
-        ) : (
-          <div>Loading Spotify Web Player...</div>
-        )}
+        <div className="webplayer">
+          <img src={currentAlbumCover} className="trackDivStyle biggerImage" />
+          <div className="trackDivStyle">
+            <div className="webSongStyle">{currentSong}</div>
+            <div className="webArtistStyle">
+              {currentArtist} - {currentAlbum}
+            </div>
+          </div>
+          <div className="buttonContainer">
+          </div>
+        </div>
       </div>
     );
   }
