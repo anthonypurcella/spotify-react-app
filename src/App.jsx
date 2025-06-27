@@ -4,6 +4,8 @@ import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import Playlist from "./components/Playlist";
 import User from "./components/User";
+import SpotifyWebPlayer from "./components/SpotifyWebPlayer";
+import { ClipLoader } from "react-spinners";
 
 //Base URL of API
 const SPOTIFY_API_BASE_URL = "https://api.spotify.com/v1/search";
@@ -19,6 +21,7 @@ function App() {
   const [userImageURL, setuserImageURL] = useState("");
   const [userID, setUserID] = useState("");
   const [login, setLogin] = useState(false);
+  const [spotifyAccountType, setSpotifyAccountType] = useState("free");
 
   async function signIn() {
     await spotifyLogin();
@@ -34,6 +37,7 @@ function App() {
     setuserImageURL(null);
     setUserID(null);
     setLogin(false);
+    setSpotifyAccountType("free");
   }
 
   // Spotify API Login
@@ -45,6 +49,8 @@ function App() {
       const profile = await fetchProfile(storedToken);
       populateUI(profile);
       setLogin(true);
+      setSpotifyAccountType(profile.type);
+      console.log(spotifyAccountType);
       return;
     }
 
@@ -70,7 +76,7 @@ function App() {
       params.append("redirect_uri", redirectURI);
       params.append(
         "scope",
-        "user-read-private user-read-email playlist-modify-public playlist-modify-private"
+        "user-read-private user-read-email playlist-modify-public playlist-modify-private streaming user-modify-playback-state user-read-playback-state"
       );
       params.append("code_challenge_method", "S256");
       params.append("code_challenge", challenge);
@@ -114,8 +120,10 @@ function App() {
         body: params,
       });
 
-      const { access_token } = await result.json();
+      const { access_token, expires_in } = await result.json();
+      const expiryTime = new Date().getTime() + expires_in * 1000;
       localStorage.setItem("access_token", access_token);
+      sessionStorage.setItem("access_token_expiry", expiryTime);
       setAccessToken(access_token);
       console.log(access_token);
       return access_token;
@@ -140,23 +148,37 @@ function App() {
   const [songSearch, setSongSearch] = useState("");
   //Song results State
   const [songResults, setSongResults] = useState([]);
+  // Loading State
+  const [resultsLoading, setResultsLoading] = useState(false);
   //Submits what is in SearchBar to SearchResults
   async function handleSubmit(e) {
     e.preventDefault();
     if (!login) {
-      alert('Please sign in to your Spotify Acoount');
+      alert("Please sign in to your Spotify Acoount");
     } else {
+      setResultsLoading(true);
       console.log("Search for " + songSearch);
-
       // Search API request
       const response = await fetch(
         `${SPOTIFY_API_BASE_URL}?q=${songSearch}&type=track&limit=20&access_token=${accessToken}`
       );
-      const data = await response.json();
-      setSongResults(data);
-      console.log(data);
+      if (response.ok) {
+        const data = await response.json();
+        setResultsLoading(false);
+        setSongResults(data);
+        console.log(data);
+      } else if (!response.ok) {
+        alert('Uh oh! Something went wrong ):\nTry signing in again.');
+      }
     }
-    
+  }
+
+  //Playback Embed
+  const [currentURI, setCurrentURI] = useState(
+    "spotify:track:29JLgNBcOky7QB68OrvYxO"
+  );
+  async function playSong(songURI) {
+    setCurrentURI(songURI);
   }
 
   //Playlist Name State
@@ -173,17 +195,18 @@ function App() {
       prev.filter((track, index) => track.uri + index !== keyToRemove)
     );
   };
-
+  // Loading State
+  const [playlistLoading, setPlaylistLoading] = useState(false);
   // Save Playlist to Spotify
   async function savePlaylistToSpotify(e) {
     e.preventDefault();
 
     if (!playlistName) {
       alert("Please enter a playlist name");
-    }
-    if (trackPlaylistArr.length === 0) {
+    } else if (trackPlaylistArr.length === 0) {
       alert("Add songs to your playlist");
     } else {
+      setPlaylistLoading(true);
       //Remove 'spotify:user:' from User ID
       console.log("User ID:", userID);
       console.log("Playlist Name:", playlistName);
@@ -231,13 +254,14 @@ function App() {
         );
         const trackData = await response.json();
         console.log(trackData);
-
+        setPlaylistLoading(false);
         //Remove Songs from Playlist Array
         if (response.ok) {
           setTrackPlaylistArr([]);
           alert(`'${playlistName}' has been added to your Spotify Account!`);
-        } if (!response.ok) {
-          alert('Something went wrong - please try again!');
+        }
+        if (!response.ok) {
+          alert("Something went wrong - please try again!");
         }
       }
     }
@@ -247,18 +271,24 @@ function App() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
-
-    if (code) {
+   
       spotifyLogin(code);
-    }
+    
   }, []);
 
-  //Sign Out if Access Token not avaiable
   useEffect(() => {
-    if (accessToken === "" && login === true) {
-      signOut();
-    }
+    const checkTokenExpiry = () => {
+      const expiryTime = localStorage.getItem("access_token_expiry");
+      if (expiryTime && new Date().getTime() > expiryTime) {
+        console.log("Access token expired. Logging in again...");
+        spotifyLogin();
+      }
+    };
+
+    const interval = setInterval(checkTokenExpiry, 5 * 60 * 1000); // check every 5 mins
+    return () => clearInterval(interval);
   }, []);
+  
 
   return (
     <>
@@ -275,6 +305,13 @@ function App() {
         login={login}
       />
       <div className="bodyContainer">
+        <div className="embedPlayer">
+          <SpotifyWebPlayer
+            accessToken={accessToken}
+            currentURI={currentURI}
+            spotifyAccountType={spotifyAccountType}
+          />
+        </div>
         <div className="searchContainer">
           <SearchBar
             songSearch={songSearch}
@@ -283,10 +320,33 @@ function App() {
           />
         </div>
         <div className="mainDivContainer">
+          <div className="resultsWithLoader">
+            {resultsLoading ? (
+              <ClipLoader
+                className="loader"
+                size={100}
+                color="rgba(30, 215, 96, 100)"
+              />
+            ) : (
+              <></>
+            )}
             <SearchResults
               songResults={songResults}
+              playSong={playSong}
               handleSongAdd={handleSongAdd}
+              spotifyAccountType={spotifyAccountType}
             />
+          </div>
+          <div className="playlistWithLoader">
+            {playlistLoading ? (
+              <ClipLoader
+                className="loader"
+                size={100}
+                color="rgba(30, 215, 96, 100)"
+              />
+            ) : (
+              <></>
+            )}
             <Playlist
               setPlaylistName={setPlaylistName}
               trackPlaylistArr={trackPlaylistArr}
@@ -295,6 +355,7 @@ function App() {
             />
           </div>
         </div>
+      </div>
     </>
   );
 }

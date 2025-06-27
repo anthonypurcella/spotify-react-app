@@ -11,7 +11,7 @@ function User({ userImageURL, signIn, signOut, login }) {
         </div>
       </>
     );
-  } else {
+  } else if (login === true) {
     return (
       <>
         <div className="spotifyUserContainer">

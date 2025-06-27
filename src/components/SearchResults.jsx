@@ -2,7 +2,9 @@ import React from "react";
 import Track from "./Track";
 
 
-const SearchResults = ({ songResults, handleSongAdd}) => {
+const SearchResults = ({ songResults, handleSongAdd, playSong}) => {
+
+  
 
   if (songResults.length < 1) {
     return (
@@ -25,6 +27,7 @@ const SearchResults = ({ songResults, handleSongAdd}) => {
                     album={item.album.name}
                     uri={item.uri}
                     image={item.album.images[0].url}
+                    playSong={() => playSong(item.uri)}
                     onAction={() => handleSongAdd(item)}
                   />
                 </li>

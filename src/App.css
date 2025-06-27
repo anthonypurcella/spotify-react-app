@@ -91,6 +91,10 @@ img {
   
 }
 
+.embedPlayer {
+  width: 54.5%;
+  max-width: 54.5%;
+}
 /* Search Bar Styling */
 .searchContainer {
   transform: translateY(-100px);
@@ -142,6 +146,15 @@ img {
 
 
 /* Song Results Styling */
+.loader {
+  position: absolute;
+}
+
+.resultsWithLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .resultsDiv {
   background-color: rgba(27, 27, 27, .6);
   box-shadow: 0 0 5px 1px;
@@ -169,6 +182,11 @@ img {
 }
 
 /* Playlist Styling */
+.playlistWithLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .playlistDiv {
   background-color: rgba(27, 27, 27, .6);
   box-shadow: 0 0 5px 1px;
@@ -242,8 +260,17 @@ img {
   max-width: 320px;
 }
 
+.playIcon {
+  width: 10px;
+}
+
+
 .buttonStyle {
   padding: 10px;
+  margin-right: 0;
+}
+
+.buttonContainer {
   margin-right: 0;
 }
 

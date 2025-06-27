@@ -14,6 +14,10 @@ User will login to their Spotify and then be able to search through Spotfiy's Tr
 ```bash
 npm install
 ```
+```bash
+npm install react-spinners
+```
+
 3. Create App through Spotify for Developers
 Once app is built there are three (3) things you will need
     - Client ID
