@@ -2,7 +2,7 @@ import React from "react";
 import Track from "./Track";
 
 
-const SearchResults = ({ songResults, isActive, isPaused, currentURI, handleSongAdd, playToggle, spotifyAccountType}) => {
+const SearchResults = ({ songResults, isPaused, currentURI, handleSongAdd, playToggle, spotifyAccountType}) => {
 
   
 

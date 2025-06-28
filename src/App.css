@@ -7,6 +7,7 @@
   background-image: url(public/blue-violet-minimal-gradient_a2hlbm6UmZqaraWkpJRmaGhrrWxrbQ-163679298.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: rgba(9, 4, 18, 0.9);
 }
 
 header {
@@ -41,6 +42,7 @@ li {
 .biggerImage {
   width: 100px;
   border:  1px solid transparent;
+  border-radius: 5px;
   background-image: repeating-conic-gradient(from var(--angle), rgba(30, 215, 96, 100), rgb(111, 144, 118), rgba(30, 215, 96, 100));
   animation: 2s spin linear infinite;
 }
@@ -114,7 +116,10 @@ li {
 }
 
 .embedPlayer {
-  width: 800px;
+  position: fixed;
+    bottom: 0;
+    width: 100%;
+
 }
 .webplayer {
   background-color: rgba(27, 27, 27, .6);
@@ -124,7 +129,6 @@ li {
   flex-direction: row;
   padding: 15px;
   align-items: center;
-  transform: translateY(-100px);
 }
 .webSongStyle {
   text-align: left;
@@ -167,7 +171,14 @@ li {
   font-style: oblique;
   margin-top: 20px;
   margin-bottom: 65px;
+  caret-color: rgba(30, 215, 96, 100);
 }
+
+input:focus {
+  outline: solid 2px rgba(30, 215, 96, 100);
+}
+
+
 
 .searchBar button {
   margin: 10px 2rem 2rem 2rem;
@@ -255,7 +266,7 @@ li {
 .inputDiv {
   margin-top: 20px;
   border-bottom: solid grey 1px;
-  width: 487px;
+  width: 498px;
 }
 .playlistInput {
   text-align: left;
@@ -340,7 +351,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: solid 2px rgba(30, 215, 96, 100);
 }
 
 .trackDivStyle {
@@ -380,14 +391,19 @@ button:focus-visible {
   .spotifyUser {
     transform: scale(.6);
   }
-  .bodyContainer {
-    transform: translateY(-40px);
-  }
- 
+ .bodyContainer {
+  transform: translateY(-40px);
+ }
   .searchBar {
     scale: calc(.75);
   }
-
+  .resultsWithLoader {
+    width: 100%;
+  }
+  .playlistWithLoader {
+    width: 100%;
+    
+  }
   .resultsDiv {
     margin-top: -25px;
   }
@@ -416,7 +432,6 @@ button:focus-visible {
   .tracksContainer {
     margin: 0 auto;
   }
-
 }
 
 
@@ -440,10 +455,10 @@ button:focus-visible {
     font-size: 1.5rem;
   }
   .resultsDiv h1, .inputDiv, .playlistInput {
-    width: 300px;
+    width: 350px;
   }
   .divTrackStyle {
-    width: 300px;
+    width: 350px;
   }
   .songStyle, .artistStyle {
     width: 175px;

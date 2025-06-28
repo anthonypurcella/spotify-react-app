@@ -10,8 +10,8 @@ const SpotifyWebPlayer = ({
   currentAlbum,
   currentAlbumCover,
   spotifyAccountType,
-  buttonLabel = "+",
 }) => {
+    
   const playerRef = useRef(null);
   const [deviceId, setDeviceId] = useState(null);
   const [playerReady, setPlayerReady] = useState(false);
@@ -104,6 +104,7 @@ const SpotifyWebPlayer = ({
             </div>
           </div>
           <div className="buttonContainer">
+            <input type="range" id="volume-slider"></input>
           </div>
         </div>
       </div>

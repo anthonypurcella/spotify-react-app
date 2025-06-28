@@ -196,6 +196,7 @@ function App() {
     setCurrentAlbumCover(image);
   }
 
+
   //Playlist Name State
   const [playlistName, setPlaylistName] = useState("");
   //Track Playlist State
@@ -320,17 +321,6 @@ function App() {
         login={login}
       />
       <div className="bodyContainer">
-        <div className="embedPlayer">
-          <SpotifyWebPlayer
-            accessToken={accessToken}
-            currentURI={currentURI}
-            currentSong={currentSong}
-            currentArtist={currentArtist}
-            currentAlbum={currentAlbum}
-            currentAlbumCover={currentAlbumCover}
-            spotifyAccountType={spotifyAccountType}
-          />
-        </div>
         <div className="searchContainer">
           <SearchBar
             songSearch={songSearch}
@@ -351,7 +341,6 @@ function App() {
             )}
             <SearchResults
               songResults={songResults}
-              isActive={isActive}
               isPaused={isPaused}
               currentURI={currentURI}
               playToggle={playToggle}
@@ -377,6 +366,21 @@ function App() {
             />
           </div>
         </div>
+      </div>
+      <div className="embedPlayer">
+        <SpotifyWebPlayer
+          accessToken={accessToken}
+          currentURI={currentURI}
+          currentSong={currentSong}
+          isActive={isActive}
+          isPaused={isPaused}
+          playToggle={playToggle}
+          handleSongAdd={handleSongAdd}
+          currentArtist={currentArtist}
+          currentAlbum={currentAlbum}
+          currentAlbumCover={currentAlbumCover}
+          spotifyAccountType={spotifyAccountType}
+        />
       </div>
     </>
   );
