@@ -22,14 +22,14 @@ npm install react-spinners
 Once app is built there are three (3) things you will need
     - Client ID
     - Client Secret
-    - Redirect URIs (Since this is a locally ran project, add the URL provided after running the *hosted network project run (provided below) with /callback*)
+    - Redirect URIs (Since this is a locally ran project, add the URL provided after running the *hosted network project run (provided below) with "/callback" appended at end*)
 
 4. Create .env.local File
    - Add '.env.local' file to your the main project folder
    - Inside of '.env.local' add
      - VITE_SPOTIFY_CLIENT_ID = *your_spotify_client_id*
      - VITE_SPOTIFY_CLIENT_SECRET = *your_spotify_client_secret*
-     - VITE_REDIRECT_URI = *your_redirect_uri*    
+     - VITE_REDIRECT_URI = *your_redirect_uri*/callback    
 
 ## Usage
 To run the project, use the following command:
@@ -47,6 +47,7 @@ In you browser, go to to the provided URL Address to view the project.
 - Song Search Using Spotify Track API
 - Display Results (20) With Ability To Add to Playlist
 - Playlist Naming, Song Removal & Save to Spotify
+- Play Song From Spotify (Premium Account Required)
 
 ## License
 This project is licensed under the [MIT License](LICENSE).

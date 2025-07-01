@@ -9,7 +9,6 @@
   background-size: cover;
   background-color: rgba(9, 4, 18, 0.9);
 }
-
 header {
   font-size: 2rem;
   background-color: rgba(27, 27, 27, .9);
@@ -18,7 +17,6 @@ header {
   display: flex;
   align-items: center;
 }
-
 header h1 {
   color: whitesmoke;
 }
@@ -32,13 +30,11 @@ li {
 .smallImage {
   width: 50px;
 }
-
 @property --angle{
   syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
 }
-
 .biggerImage {
   width: 100px;
   border:  1px solid transparent;
@@ -46,7 +42,6 @@ li {
   background-image: repeating-conic-gradient(from var(--angle), rgba(30, 215, 96, 100), rgb(111, 144, 118), rgba(30, 215, 96, 100));
   animation: 2s spin linear infinite;
 }
-
 @keyframes spin{
   from{
     --angle: 0deg;
@@ -70,7 +65,6 @@ li {
   width: 100px;
   margin-right: 0;
 }
-
 .spotifyUser button {
   color:  rgba(104, 104, 104, 0);
   width: 62px;
@@ -79,7 +73,6 @@ li {
   border-radius: 100px;
   transform: translate(0,-67px);
 }
-
 .spotifyUser button:hover {
   border-color: whitesmoke;
   
@@ -105,7 +98,6 @@ li {
 .signInUser:hover {
   cursor: pointer;
 }
-
 .profileImage {
   width: 60px;
   height: 60px;
@@ -115,6 +107,204 @@ li {
   
 }
 
+
+/* Search Bar Styling */
+.searchContainer {
+  transform: translateY(-100px);
+  width: 100%;
+}
+.searchBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.searchBar input {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.5em 2em;
+  font-size: 2em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color:  rgba(27, 27, 27, .75);
+  color: whitesmoke;
+  font-style: oblique;
+  margin-top: 20px;
+  margin-bottom: 65px;
+  caret-color: rgba(30, 215, 96, 100);
+}
+input:focus {
+  outline: solid 2px rgba(30, 215, 96, 100);
+}
+.searchBar button {
+  margin: 10px 2rem 2rem 2rem;
+  background-color: rgba(27, 27, 27, .95);
+  color: whitesmoke;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.8em 2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.25s;
+  margin-bottom: 4rem;
+  display: none;
+}
+
+/* Main Body */
+.bodyContainer {
+  margin-bottom: 100px;
+}
+.mainDivContainer {
+  width: 100%;
+  transform: translateY(-120px);
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1500px;
+}
+
+
+/* Song Results Styling */
+.loader {
+  position: absolute;
+}
+.resultsWithLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.resultsDiv {
+  background-color: rgba(27, 27, 27, .6);
+  box-shadow: 0 0 5px 1px;
+  border-radius: 10px;
+  max-height: 60rem;
+  overflow-y: auto;
+  animation: scroll 2s linear infinite;
+  padding: 1rem;
+  min-height: 60rem;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  justify-items: center;
+}
+.resultsDiv h1 {
+  margin-top: 20px;
+  text-align: left;
+  padding-bottom: 20px;
+  border-bottom: solid grey 1px;
+  color: whitesmoke;
+  width: 487px;
+}
+
+/* Playlist Styling */
+.playlistWithLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.playlistDiv {
+  background-color: rgba(27, 27, 27, .6);
+  box-shadow: 0 0 5px 1px;
+  border-radius: 10px;
+  min-height: 60rem;
+  max-height: 60rem;
+  overflow-y: auto;
+  white-space: nowrap;
+  animation: scroll 2s linear infinite;
+  justify-items: center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+.inputDiv {
+  margin-top: 20px;
+  border-bottom: solid grey 1px;
+  width: 498px;
+}
+.playlistInput {
+  text-align: left;
+  color: whitesmoke;
+  font-size: 2rem;
+  font-style: italic;
+  text-align: center;
+  border: none;
+  background: transparent;
+  outline: 0;
+  margin-bottom: 1rem;
+}
+.spotifySaveButton {
+  margin-top: 25px;
+  color: whitesmoke;
+  background-color: rgba(30, 215, 96, 100);
+  text-shadow:  0px 0px 1px white;
+  margin-bottom: 25px;
+}
+
+/* Track Component Styling */
+.divTrackStyle {
+  display: flex;
+  flex-direction: row;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: solid grey 1px;
+  align-items: center;
+  width: 487px;
+}
+.trackDivStyle {
+  margin-left: 0;
+  margin-right: 25px;
+}
+.songStyle {
+  text-align: left;
+  color: whitesmoke;
+  font-size: 1.25rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  animation: scroll 2s linear infinite;
+  max-width: 320px;
+  margin-bottom: 5px;
+}
+.artistStyle {
+  color: grey;
+  text-align: left;
+  overflow-x: auto;
+  white-space: nowrap;
+  animation: scroll 2s linear infinite;
+  max-width: 320px;
+}
+.playIcon {
+  width: 10px;
+}
+.buttonStyle {
+  padding: 10px;
+  margin-right: 0;
+}
+.buttonContainer {
+  margin-right: 0;
+}
+button {
+  background-color: transparent;
+  color: white;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.25s;
+}
+button:hover {
+  border-color: whitesmoke;
+}
+button:focus,
+button:focus-visible {
+  outline: solid 2px rgba(30, 215, 96, 100);
+}
+
+
+/* Web Player */
 .embedPlayer {
   position: fixed;
     bottom: 0;
@@ -147,221 +337,12 @@ li {
   white-space: nowrap;
   animation: scroll 2s linear infinite;
 }
-
-/* Search Bar Styling */
-.searchContainer {
-  transform: translateY(-100px);
-  width: 100%;
-}
-
-.searchBar {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-.searchBar input {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.5em 2em;
-  font-size: 2em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color:  rgba(27, 27, 27, .75);
-  color: whitesmoke;
-  font-style: oblique;
-  margin-top: 20px;
-  margin-bottom: 65px;
-  caret-color: rgba(30, 215, 96, 100);
-}
-
-input:focus {
-  outline: solid 2px rgba(30, 215, 96, 100);
+.webPlayerButton {
+  width: 25px;
 }
 
 
-
-.searchBar button {
-  margin: 10px 2rem 2rem 2rem;
-  background-color: rgba(27, 27, 27, .95);
-  color: whitesmoke;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.8em 2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition: 0.25s;
-  margin-bottom: 4rem;
-  display: none;
-}
-
-.mainDivContainer {
-  width: 100%;
-  transform: translateY(-120px);
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 1500px;
-}
-
-
-/* Song Results Styling */
-.loader {
-  position: absolute;
-}
-
-.resultsWithLoader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.resultsDiv {
-  background-color: rgba(27, 27, 27, .6);
-  box-shadow: 0 0 5px 1px;
-  border-radius: 10px;
-  max-height: 60rem;
-  overflow-y: auto;
-  animation: scroll 2s linear infinite;
-  padding: 1rem;
-  min-height: 60rem;
-  display: flex;
-  flex-direction: column;
-  width: 600px;
-  justify-items: center;
-}
-
-
-
-.resultsDiv h1 {
-  margin-top: 20px;
-  text-align: left;
-  padding-bottom: 20px;
-  border-bottom: solid grey 1px;
-  color: whitesmoke;
-  width: 487px;
-}
-
-/* Playlist Styling */
-.playlistWithLoader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.playlistDiv {
-  background-color: rgba(27, 27, 27, .6);
-  box-shadow: 0 0 5px 1px;
-  border-radius: 10px;
-  min-height: 60rem;
-  max-height: 60rem;
-  overflow-y: auto;
-  white-space: nowrap;
-  animation: scroll 2s linear infinite;
-  justify-items: center;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  width: 600px;
-}
-
-.inputDiv {
-  margin-top: 20px;
-  border-bottom: solid grey 1px;
-  width: 498px;
-}
-.playlistInput {
-  text-align: left;
-  color: whitesmoke;
-  font-size: 2rem;
-  font-style: italic;
-  text-align: center;
-  border: none;
-  background: transparent;
-  outline: 0;
-  margin-bottom: 1rem;
-}
-
-
-.spotifySaveButton {
-  margin-top: 25px;
-  color: whitesmoke;
-  background-color: rgba(30, 215, 96, 100);
-  text-shadow:  0px 0px 1px white;
-  margin-bottom: 25px;
-}
-
-/* Track Component Styling */
-
-.divTrackStyle {
-  display: flex;
-  flex-direction: row;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  border-bottom: solid grey 1px;
-  align-items: center;
-  width: 487px;
-}
-
-.songStyle {
-  text-align: left;
-  color: whitesmoke;
-  font-size: 1.25rem;
-  overflow-x: auto;
-  white-space: nowrap;
-  animation: scroll 2s linear infinite;
-  max-width: 320px;
-  margin-bottom: 5px;
-}
-.artistStyle {
-  color: grey;
-  text-align: left;
-  overflow-x: auto;
-  white-space: nowrap;
-  animation: scroll 2s linear infinite;
-  max-width: 320px;
-}
-
-.playIcon {
-  width: 10px;
-}
-
-
-.buttonStyle {
-  padding: 10px;
-  margin-right: 0;
-}
-
-.buttonContainer {
-  margin-right: 0;
-}
-
-button {
-  background-color: transparent;
-  color: white;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition: 0.25s;
-}
-button:hover {
-  border-color: whitesmoke;
-}
-button:focus,
-button:focus-visible {
-  outline: solid 2px rgba(30, 215, 96, 100);
-}
-
-.trackDivStyle {
-  margin-left: 0;
-  margin-right: 25px;
-}
-
-
-
-
+/* Responsive Styling */
 @media only screen and (max-width: 1275px) {
   .embedPlayer {
     width: 650px;
@@ -373,7 +354,6 @@ button:focus-visible {
     margin-bottom: 2rem;
   }
 }
-
 @media only screen and (max-width: 660px) {
   header {
     height: 80px;
@@ -433,8 +413,6 @@ button:focus-visible {
     margin: 0 auto;
   }
 }
-
-
 @media only screen and (max-width: 555px) {
   .resultsDiv h1, .inputDiv, .playlistInput {
     width: 375px;
@@ -448,7 +426,6 @@ button:focus-visible {
   }
 
 }
-
 @media only screen and (max-width: 435px) {
   .searchBar input {
     width: 250px;
