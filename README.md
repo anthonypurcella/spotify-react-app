@@ -3,6 +3,8 @@
 Jammming is a simple Spotify API Web App, built using React/Vite, to have a user create a playlist and add it to their own Spotify account.
 User will login to their Spotify and then be able to search through Spotfiy's Track API and add songs to a playlist that can be added to their account.
 
+Public Webiste: https://spotify-playlist-anthony.netlify.app
+
 *For this project to work, you will need to create an app with Spotify for Developers*
 
 ## Installation
