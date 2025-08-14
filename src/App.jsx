@@ -11,7 +11,7 @@ const SPOTIFY_API_BASE_URL = "https://api.spotify.com/v1/search";
 
 function App() {
   const clientId = '71816d58c519487fa0ee5c3e59351f06';
-  const redirectURI = "https://spotify-playlist-anthony.netlify.app/callback";
+  const redirectURI = "https://spotify-playlist-anthony.netlify.app";
 
   //State API Token
   const [accessToken, setAccessToken] = useState("");
